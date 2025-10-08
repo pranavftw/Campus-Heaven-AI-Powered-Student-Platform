@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Logs</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111827;
+      color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logs-container {
+      width: 90%;
+      max-width: 900px;
+      background-color: #1f2937;
+      padding: 2rem;
+      border-radius: 0.75rem;
+    }
+
+    h2, h3 {
+      color: #a78bfa;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      background-color: #374151;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: #a78bfa;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="logs-container">
+    <h2>Chat Logs</h2>
+
+    {% for fname, data in logs %}
+      <h3>{{ fname }}</h3>
+      <pre>{{ data }}</pre>
+    {% endfor %}
+
+    <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+  </div>
+</body>
+</html>

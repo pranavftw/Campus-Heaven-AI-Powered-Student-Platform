@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Campus Heaven{% endblock %}</title>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
+    integrity="sha512-Fo3rlrZj/k7ujTTXRN+2AaQkMRXfQK1C8X+6D9GzyY9D6b4G9HZb8LxDJb6Bw/6QOvzHjvPRf7S9VYGXK6p9Eg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #F2EFEB;
+      color: #333;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+    }
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(135deg, #C291F2, #AE7EF2);
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    header:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    /* The logo now uses an ID to attach a click event */
+    header .logo {
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    header nav {
+      display: flex;
+      align-items: center;
+    }
+    header nav a {
+      margin: 0 15px;
+      font-size: 1.1em;
+      color: #fff;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: #CAB4D9;
+    }
+    header .user-info {
+      display: flex;
+      align-items: center;
+    }
+    header .user-info i {
+      margin-right: 8px;
+      font-size: 1.8em;
+    }
+    header .user-info span {
+      margin-right: 10px;
+      font-weight: 600;
+    }
+    header .user-info .button {
+      background: #AE7EF2;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-size: 0.9em;
+      transition: background 0.3s ease;
+    }
+    header .user-info .button:hover {
+      background: #CAB4D9;
+    }
+    /* Main container */
+    .main-container {
+      padding-top: 120px;
+      padding-bottom: 60px;
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1400x600') center center/cover no-repeat;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInDown 1s ease-out;
+    }
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+    .hero .buttons a {
+      margin: 0 10px;
+      padding: 15px 30px;
+      background: #AE7EF2;
+      color: #fff;
+      border-radius: 30px;
+      font-size: 1em;
+      transition: background 0.3s ease, transform 0.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .hero .buttons a:hover {
+      background: #CAB4D9;
+      transform: translateY(-3px);
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Loader Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(242, 239, 235, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s;
+    }
+    .loader.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .loader .light {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #AE7EF2;
+      border-top: 6px solid #CAB4D9;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Forms */
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    form:hover {
+      transform: scale(1.02);
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: border-color 0.3s ease;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #AE7EF2;
+      outline: none;
+    }
+    form button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      background: #AE7EF2;
+      color: #fff;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    form button:hover {
+      background: #CAB4D9;
+      transform: translateY(-2px);
+    }
+    /* Listing Cards */
+    .listing {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .listing:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .listing img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #C291F2, #AE7EF2);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+    footer p {
+      margin-bottom: 15px;
+    }
+    footer .social a {
+      margin: 0 10px;
+      font-size: 1.4em;
+      color: #fff;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    footer .social a:hover {
+      transform: translateY(-3px);
+      color: #CAB4D9;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+      header nav {
+        margin: 10px 0;
+      }
+      .hero h1 {
+        font-size: 2.5em;
+      }
+      .hero p {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="light"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <!-- Instead of using inline onclick with conflicting quotes, we use an ID -->
+    <div class="logo" id="homeLogo">Campus Heaven</div>
+    <nav>
+      <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a>
+      <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
+    </nav>
+    {% if session.username %}
+    <div class="user-info">
+      <i class="fas fa-user-circle"></i>
+      <span>{{ session.username }}</span>
+      <a href="{{ url_for('logout') }}" class="button"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="main-container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash" style="background: #CAB4D9; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Campus Heaven. All Rights Reserved.</p>
+    <div class="social">
+      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+
+  <!-- Script to handle the logo click event -->
+  <script>
+    document.getElementById('homeLogo').addEventListener('click', function() {
+      window.location.href = "{{ url_for('index') }}";
+    });
+
+    // Loader effect on page load
+    document.addEventListener("DOMContentLoaded", function(){
+      var loader = document.getElementById("loader");
+      loader.classList.add("active");
+      setTimeout(function(){
+        loader.classList.remove("active");
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

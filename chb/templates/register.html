@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Campus Heaven</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* LEFT SECTION */
+    .left-content {
+      flex: 1;
+      padding: 40px;
+      color: #f0f9ff;
+      animation: fadeInUp 1.3s ease forwards;
+      opacity: 0;
+    }
+
+    .left-content h1 {
+      text-align:center;
+      font-size: 48px;   
+           font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .left-content p {
+            text-align:center;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+      .left-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+      }
+
+
+    /* RIGHT SECTION */
+    .form-box {
+      flex: 1;
+      max-width: 400px;
+      background-color: #1a1a1a;
+      padding: 80px 60px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      animation: fadeInScale 1.3s ease forwards;
+      opacity: 0;
+    }
+
+    .form-box h2 {
+      text-align: center;
+      color: #00bfff;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form input {
+      padding: 12px;
+      margin-bottom: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #333;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    form input:focus {
+      border: 1px solid #00bfff;
+      outline: none;
+    }
+
+    button {
+      background-color: #00bfff;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 130px;
+      align-self: center;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00bfffaa;
+    }
+
+    .message {
+      text-align: center;
+      color: rgb(255, 255, 255);
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .message a {
+      color: #00bfff;
+      text-decoration: none;
+    }
+
+    .message a:hover {
+      text-decoration: underline;
+    }
+
+    /* New Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .form-box {
+        max-width: 100%;
+      }
+
+      .left-content {
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Text + Image -->
+    <div class="left-content">
+      <h1>Welcome to Campus Heaven</h1>
+      <p>Where comfort meets convenience for students. Enjoy your stay with our premium accommodations and services.</p>
+      <img src="{{ url_for('static', filename='chbu.png') }}" alt="Campus Heaven Image">
+    </div>
+
+    <!-- Right Form -->
+    <div class="form-box">
+      <h2><i class="fas fa-user-plus"></i> Register</h2>
+      <form method="POST">
+        <input type="text" name="username" placeholder="Choose a username" required>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <input type="password" name="password" placeholder="Choose a password" required>
+        <button type="submit">Register</button>
+      </form>
+      <p class="message">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

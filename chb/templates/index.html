@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Campus Heaven</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      color: #FFFFFF;
+    }
+
+    a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00bfff;
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    header nav ul li {
+      position: relative;
+    }
+
+    header nav ul li a {
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    header nav ul li a:hover {
+      color: #00bfff;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      padding: 10px;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: #FFFFFF;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 150px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      margin: 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .hero p {
+      font-size: 24px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .hero .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .hero .cta-buttons a {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .hero .cta-buttons a:hover {
+      background-color: #009acd;
+      transform: translateY(-5px);
+      text-decoration: none;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 0;
+      margin-top: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    footer .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    footer h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #00bfff;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+    }
+
+    footer ul li a {
+      color: #FFFFFF;
+    }
+
+    footer .social-media a {
+      margin-right: 10px;
+      font-size: 24px;
+      color: #FFFFFF;
+      transition: color 0.3s;
+    }
+
+    footer .social-media a:hover {
+      color: #00bfff;
+    }
+
+    footer .legal {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    /* Popup Modal */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .popup-content {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      border: 2px solid #00bfff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .popup-content p {
+      font-size: 18px;
+      margin: 0 0 20px;
+      font-weight: bold;
+    }
+
+    .popup-content .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      color: #00bfff;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .popup-content .close:hover {
+      color: #009acd;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Campus Heaven Business</div>
+      <nav>
+        <ul>
+          <li><a href="#accommodation" onclick="showLoginPopup()">Add New Listing</a></li>
+          </li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Pop-up Modal -->
+  <div id="loginPopup" class="popup" style="display: none;" role="dialog" aria-modal="true">
+    <div class="popup-content">
+      <span class="close" onclick="closeLoginPopup()">&times;</span>
+      <p>Login to access this page</p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1><i class="fas fa-university"></i> Welcome to Campus Heaven Business</h1>
+    <p>Your Smart Business Growth & Insights Hub.<br>
+       Showcase, Manage, and Analyze Your Listings with AI-Powered Reviews &amp; Business Analytics.</p>
+    <div class="cta-buttons">
+      {% if session.username %}
+        <a href="{{ url_for('index') }}" class="cta-button">
+          <i class="fas fa-th-list"></i> View Listings
+        </a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="cta-button">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a href="{{ url_for('register') }}" class="cta-button">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <script>
+    function showLoginPopup() {
+      document.getElementById("loginPopup").style.display = "flex";
+    }
+  
+    function closeLoginPopup() {
+      document.getElementById("loginPopup").style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Heaven</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      color: #FFFFFF;
+    }
+
+    a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00bfff;
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    header nav ul li {
+      position: relative;
+    }
+
+    header nav ul li a {
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    header nav ul li a:hover {
+      color: #00bfff;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      padding: 10px;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: #FFFFFF;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 150px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      margin: 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .hero p {
+      font-size: 24px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+
+    .hero .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .hero .cta-buttons a {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .hero .cta-buttons a:hover {
+      background-color: #009acd;
+      transform: translateY(-5px);
+      text-decoration: none;
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 0;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 20px 0;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .section h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: #00bfff;
+    }
+
+    .section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #F4F4F4;
+    }
+
+    .section .cta-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .section .cta-button:hover {
+      background-color: #009acd;
+      transform: translateY(-5px);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(5px);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .service-card i {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #00bfff;
+    }
+
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #FFFFFF;
+    }
+
+    .service-card p {
+      font-size: 16px;
+      color: #F4F4F4;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 0;
+      margin-top: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    footer .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    footer h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #00bfff;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+    }
+
+    footer ul li a {
+      color: #FFFFFF;
+    }
+
+    footer .social-media a {
+      margin-right: 10px;
+      font-size: 24px;
+      color: #FFFFFF;
+      transition: color 0.3s;
+    }
+
+    footer .social-media a:hover {
+      color: #00bfff;
+    }
+
+    footer .legal {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    .loader {
+      height: 4px;
+      width: 100%;
+      background: rgb(44, 44, 44);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader .light {
+      width: 100px;
+      height: 100%;
+      position: absolute;
+      left: -30%;
+      top: 0;
+      background: linear-gradient(87deg, rgba(0, 0, 0, 0) 0%, rgb(0, 204, 255) 40%, rgb(0, 204, 255) 60%, rgba(22, 113, 205, 0) 100%);
+      animation: light 1.5s infinite ease-in-out;
+    }
+
+    @keyframes light {
+      from { left: -30%; }
+      to { left: 100%; }
+    }
+    /* Popup Modal */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .popup-content {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      border: 2px solid #00bfff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .popup-content p {
+      font-size: 18px;
+      margin: 0 0 20px;
+      font-weight: bold;
+    }
+
+    .popup-content .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      color: #00bfff;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .popup-content .close:hover {
+      color: #009acd;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Campus Heaven</div>
+      <nav>
+        <ul>
+          <li><a href="#accommodation" onclick="showLoginPopup()">Accommodations</a></li>
+          <li class="dropdown">
+            <a href="#amenities" onclick="showLoginPopup()">Amenities <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="#gym" onclick="showLoginPopup()">GYM</a>
+              <a href="#fitness-centres" onclick="showLoginPopup()">Fitness Centres</a>
+              <a href="#library" onclick="showLoginPopup()">Library</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#food" onclick="showLoginPopup()">Food <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="#meal-services" onclick="showLoginPopup()">Meal Services</a>
+              <a href="#hotels" onclick="showLoginPopup()">Hotels</a>
+              <a href="#takeaway" onclick="showLoginPopup()">Takeaway</a>
+            </div>
+          </li>
+          <li><a href="chatbot.html" onclick="showLoginPopup()">Urgent Care</a></li>
+          <li><a href="#contact" onclick="showLoginPopup()">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Pop-up Modal -->
+  <div id="loginPopup" class="popup" style="display: none;" role="dialog" aria-modal="true">
+    <div class="popup-content">
+      <span class="close" onclick="closeLoginPopup()">&times;</span>
+      <p>Login to access this page</p>
+    </div>
+  </div>
+  
+  <div class="loader">
+    <div class="light"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Campus Heaven: Your Ultimate Student Living and Services Hub</h1>
+    <p>Discover, Book, and Enjoy the Best Accommodation and Services Near Your College</p>
+    <div class="cta-buttons">
+      {% if session.username %}
+        <a href="{{ url_for('index') }}" class="cta-button">
+          <i class="fas fa-th-list"></i> View Listings
+        </a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="cta-button">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a href="{{ url_for('register') }}" class="cta-button">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="loader">
+    <div class="light"></div>
+  </div>
+  <!-- Accommodation Section -->
+  <section id="accommodation" class="section">
+    <h2>Find Your Perfect PG</h2>
+    <p>Explore top-rated PGs and rooms near your college. Read reviews and book your stay with ease.</p>
+    <button class="cta-button">
+      <i class="fas fa-bed"></i> Browse Accommodation
+    </button>
+  </section>
+
+  <div class="loader">
+    <div class="light"></div>
+  </div>
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <h2>Comprehensive Student Services</h2>
+    <p>From urgent care to gym sessions, we've got all the essential services you need to thrive.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-ambulance"></i>
+        <h3>Urgent Care</h3>
+        <p>Immediate help when you need it most.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-hospital"></i>
+        <h3>Medical Care</h3>
+        <p>Access to quality healthcare services.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-dumbbell"></i>
+        <h3>Gym</h3>
+        <p>Stay fit and active with our gym bookings.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-book"></i>
+        <h3>Library</h3>
+        <p>Book your quiet study space at the library.</p>
+      </div>
+    </div>  
+  </section>
+
+  <div class="loader">
+    <div class="light"></div>
+  </div>
+  <!-- Meals Section -->
+  <section id="meals" class="section">
+    <h2>Savor Delicious Meals</h2>
+    <p>Enjoy convenient and nutritious dining options delivered right to your doorstep.</p>
+    <button class="cta-button">
+      <i class="fas fa-utensils"></i> Explore Meal Plans
+    </button>
+  </section>
+
+  <div class="loader">
+    <div class="light"></div>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#accommodation">Accommodation</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#meals">Meals</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Social Media</h3>
+        <div class="social-media">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: info@campusheaven.com</p>
+        <p>Phone: +1 234 567 890</p>
+      </div>
+    </div>
+    <div class="legal">
+      <p>Terms of Service | Privacy Policy</p>
+    </div>
+  </footer>
+  <script>
+    function showLoginPopup() {
+      document.getElementById("loginPopup").style.display = "flex";
+    }
+  
+    function closeLoginPopup() {
+      document.getElementById("loginPopup").style.display = "none";
+    }
+  </script>
+</body>
+</html>

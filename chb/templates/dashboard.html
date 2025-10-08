@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Campus Heaven</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      color: #FFFFFF;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Sticky Header */
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00bfff;
+    }
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    header nav ul li a {
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    header nav ul li a:hover {
+      color: #00bfff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 10px;
+      font-size: 36px;
+    }
+    h3 {
+      color: #00bfff;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #009acd;
+      transform: translateY(-3px);
+    }
+    .center {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .listing {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+    }
+    .listing p {
+      margin: 8px 0;
+    }
+    .listing strong {
+      color: #00bfff;
+    }
+    .listing img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      border: 2px solid #00bfff;
+      border-radius: 20px;
+      margin: 5% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      color: #FFFFFF;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      color: #00bfff;
+    }
+    .modal-content label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #00bfff;
+    }
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 14px;
+    }
+    .modal-content button[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .modal-content button[type="submit"]:hover {
+      background-color: #009acd;
+      transform: translateY(-2px);
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: #00bfff;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .close:hover {
+      color: #009acd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Campus Heaven Business</div>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+          <li><a href="{{ url_for('add_listing') }}">Add Listing</a></li>
+          {% if session.username %}
+          <li class="user-info">Hello, {{ session.username }}</li>
+          {% endif %}
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+
+  <div class="container">
+    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+
+    <div class="center">
+      <a href="{{ url_for('add_listing') }}" class="button">
+        <i class="fas fa-plus"></i> Add New Listing
+      </a>
+    </div>
+
+    <h3>Your Listings</h3>
+
+    {% if listings %}
+      {% for listing in listings %}
+        <div class="listing">
+          <p><strong>Category:</strong> {{ listing['category'] }} <i class="fas fa-tag"></i></p>
+          <p><strong>Name:</strong> {{ listing['name'] }}</p>
+          {% if listing['address'] %}
+            <p><strong>Address:</strong> {{ listing['address'] }}</p>
+          {% endif %}
+          {% if listing['facilities'] %}
+            <p><strong>Facilities:</strong> {{ listing['facilities'] }}</p>
+          {% endif %}
+          {% if listing['cuisine'] %}
+            <p><strong>Cuisine:</strong> {{ listing['cuisine'] }}</p>
+          {% endif %}
+          <p><strong>Price:</strong> ₹{{ listing['price'] }}</p>
+          {% if listing['image'] %}
+            <img src="{{ listing['image'] }}" alt="Listing Image">
+          {% endif %}
+
+          <div style="display:flex; gap:10px; margin-top:15px;">
+            <button class="button edit-button"
+                    data-id="{{ listing['id'] }}"
+                    data-category="{{ listing['category'] }}"
+                    data-name="{{ listing['name'] }}"
+                    data-address="{{ listing['address'] }}"
+                    data-facilities="{{ listing['facilities'] }}"
+                    data-cuisine="{{ listing['cuisine'] }}"
+                    data-price="{{ listing['price'] }}"
+                    data-image="{{ listing['image'] }}">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+
+            <form method="POST" action="{{ url_for('delete_listing', listing_id=listing['id']) }}">
+              <button type="submit" class="button" onclick="return confirm('Delete this listing?');">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; margin-top:30px;">You have not added any listings yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2><i class="fas fa-edit"></i> Edit Listing</h2>
+      <form id="editForm" method="POST">
+        <label for="edit_category">Category</label>
+        <select id="edit_category" name="category" required onchange="toggleEditFields(this.value)">
+          <option value="Accommodations">Accommodations</option>
+          <option value="Gyms">Gyms</option>
+          <option value="Libraries">Libraries</option>
+          <option value="Meal Services">Meal Services</option>
+        </select>
+
+        <label for="edit_name">Name</label>
+        <input type="text" id="edit_name" name="name" required>
+
+        <div id="edit_address_fields">
+          <label for="edit_address">Address</label>
+          <input type="text" id="edit_address" name="address">
+
+          <label for="edit_facilities">Facilities</label>
+          <textarea id="edit_facilities" name="facilities" rows="3"></textarea>
+        </div>
+
+        <div id="edit_cuisine_field" style="display:none;">
+          <label for="edit_cuisine">Cuisine</label>
+          <input type="text" id="edit_cuisine" name="cuisine">
+        </div>
+
+        <label for="edit_price">Price</label>
+        <input type="number" step="0.01" id="edit_price" name="price" required>
+
+        <label for="edit_image">Image URL</label>
+        <input type="text" id="edit_image" name="image">
+
+        <button type="submit"><i class="fas fa-check"></i> Update Listing</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Modal controls
+    const modal = document.getElementById("editModal");
+    const closeBtn = document.querySelector(".close");
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
+
+    // Open & populate modal
+    document.querySelectorAll(".edit-button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.id;
+        ["category","name","address","facilities","cuisine","price","image"].forEach(field => {
+          document.getElementById(`edit_${field}`).value = btn.dataset[field];
+        });
+        document.getElementById("editForm").action = `/edit_listing/${id}`;
+        toggleEditFields(btn.dataset.category);
+        modal.style.display = "block";
+      });
+    });
+
+    // Toggle fields for Meal Services
+    function toggleEditFields(cat) {
+      const addr = document.getElementById("edit_address_fields");
+      const cuis = document.getElementById("edit_cuisine_field");
+      if (cat === "Meal Services") {
+        addr.style.display = "none";
+        cuis.style.display = "block";
+      } else {
+        addr.style.display = "block";
+        cuis.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

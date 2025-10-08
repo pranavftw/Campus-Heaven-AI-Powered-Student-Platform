@@ -1,0 +1,12 @@
+Sunrise PG| 2025-04-19 | health_concerns
+Sunrise PG| 2025-04-19 | health_concerns
+Sunrise PG| 2025-04-20 | accommodation_problems
+Sunrise PG| 2025-05-15 | health_concerns
+Sunrise PG| 2025-05-15 | financial_issues
+Sunrise PG| 2025-05-15 | homesickness
+Sunrise PG| 2025-05-15 | social_integration
+Sunrise PG| 2025-06-07 | health_concerns
+Sunrise PG| 2025-06-07 | financial_issues
+Sunrise PG| 2025-06-07 | unknown
+Sunrise PG| 2025-06-07 | social_integration
+Sunrise PG| 2025-06-08 | financial_issues

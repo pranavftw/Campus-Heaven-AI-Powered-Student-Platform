@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Campus Heaven</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+     .hero {
+      text-align: center;
+      padding: 120px 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      font-weight: bold;
+    }
+    .hero p {
+     font-size: 24px; /* Increase the font size */
+    font-weight: bold; /* Make the text bold */
+    margin-top: 10px; /* Optional: Add some spacing below the <h1> */
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    /* Form container styling */
+    .form-container {
+      max-width: 450px;
+      padding: 60px;
+      border-radius: 20px;
+      background-color: #1a1a1a;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      border: 2px solid #333;
+    }
+    /* Header styling with Font Awesome icons */
+    .form-container h2 {
+      text-align: center;
+      margin: 0 0 20px;
+      color: #00bfff;
+      font-size: 50px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      position: relative;
+      padding-left: 30px;
+      padding-right: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .form-container h2::before,
+    .form-container h2::after {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background-color: #00bfff;
+    }
+    .form-container h2::before {
+      left: 0;
+    }
+    .form-container h2::after {
+      right: 0;
+      animation: pulse 1s linear infinite;
+    }
+    @keyframes pulse {
+      from {
+        transform: scale(2);
+        opacity: 1;
+      }
+      to {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+    /* Form input styling */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(105, 105, 105, 0.5);
+      border-radius: 10px;
+      background-color: #333;
+      color: #fff;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    input:focus {
+      border-color: #00bfff;
+      outline: none;
+    }
+    /* Button styling */
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #00bfff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #00bfff96;
+    }
+    /* Message and link styling */
+    .message {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .message a {
+      color: #00bfff;
+      text-decoration: none;
+    }
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px; /* Slightly thicker */
+        background: rgba(0, 0, 0, 0.1); /* Lighter background for contrast */
+        overflow: hidden;
+      }
+      .loader .light {
+        width: 150px; /* Increased width for better visibility */
+        height: 100%;
+        position: absolute;
+        left: -150px; /* Start fully off-screen */
+        background: linear-gradient(90deg, transparent, #00bfff, transparent); /* Simpler gradient */
+        animation: light 1.5s infinite linear;
+      }
+      @keyframes light {
+        0% { left: -150px; }
+        100% { left: 100%; }
+      }
+      /* Updated Footer */
+      footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #1a1a1a; /* Slightly darker background */
+        padding: 10px 0; /* Adjusted padding */
+        text-align: center;
+        color: #00bfff; /* Matching accent color */
+        font-size: 12px; /* Consistent font size */
+      }
+      footer p {
+        margin: 0; /* Ensure no extra spacing */
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <h1>Welcome Back to Campus Heaven</h1>
+      <p>Where Comfort Meets Convenience</p>
+      <img src="{{ url_for('static', filename='chstu.png') }}" alt="A welcoming campus image" />
+    </section>
+    
+    <div class="form-container">
+      <h2><i class="fas fa-sign-in-alt"></i> Login </h2>
+      <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit"><i class="fas fa-arrow-right"></i> Login</button>
+      </form>
+      <p class="message">Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </div>
+    
+    <footer>
+      <p>© 2025 Campus Heaven. All rights reserved.</p>
+    </footer>
+    
+    <div class="loader">
+      <div class="light"></div>
+    </div>
+  </body>
+</html>

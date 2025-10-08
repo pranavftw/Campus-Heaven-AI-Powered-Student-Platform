@@ -1,0 +1,39 @@
+# ——— Analytics Helpers ———
+
+def detect_sarcasm(review):
+    """
+    Detects sarcasm using predefined patterns and sentiment flips.
+    It looks for a mix of positive and negative sentiment words, specific sarcastic phrases,
+    and additional sarcastic expressions.
+    """
+    sarcasm_indicators = {
+        "great", "amazing", "awesome", "loved", "best", "fantastic", "incredible", 
+        "brilliant", "spectacular", "marvelous", "phenomenal", "stunning", "mind-blowing", 
+        "impressive", "wonderful", "terrific", "fabulous", "superb"
+    }
+    negative_words = {
+        "worst", "bad", "terrible", "awful", "hate", "poor", "horrible", "sucks", 
+        "dreadful", "abysmal", "lousy", "disappointing", "pathetic", "subpar"
+    }
+    sarcastic_phrases = [
+        "oh great", "just perfect", "yeah right", "exactly what i wanted", 
+        "fantastic... not", "well isn't that nice", "what a joy", "wonderful experience... not",
+        "i just love waiting", "oh, joy", "perfect timing", "exactly what i expected", 
+        "not impressed", "no kidding", "obviously", "clearly", "incredible, really", "amazing, isn't it", 
+        "so hilarious", "how convenient", "excellent, as always"
+    ]
+    additional_sarcasm = {
+        "oh, absolutely!", "how thoughtful!", "well, isn't that special!", "wow, groundbreaking!",
+        "oh, you don't say!", "bravo, well done!", "how original!", "a true masterpiece!",
+        "clearly the best!", "oh, just perfect!", "what a surprise!", "outstanding effort!",
+        "really impressive!", "oh, that's rich!", "truly state-of-the-art!", "wonderful choice!",
+        "oh, this is fine!", "remarkably consistent!", "simply flawless!", "my favorite part!"
+    }
+    
+    review_lower = review.lower()
+    words = set(review_lower.split())
+    indicator_negative_overlap = bool(words & sarcasm_indicators and words & negative_words)
+    phrase_detected = any(phrase in review_lower for phrase in sarcastic_phrases)
+    additional_detected = any(phrase.lower() in review_lower for phrase in additional_sarcasm)
+    
+    return indicator_negative_overlap or phrase_detected or additional_detected

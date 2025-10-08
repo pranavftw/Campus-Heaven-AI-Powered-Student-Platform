@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analytics</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+      color: #FFFFFF;
+    }
+    a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00bfff;
+    }
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    header nav ul li {
+      position: relative;
+    }
+    header nav ul li a {
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    header nav ul li a:hover {
+      color: #00bfff;
+    }
+  
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 150px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+    .hero h1 {
+      font-size: 56px;
+      margin: 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+    .hero p {
+      font-size: 24px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #FFFFFF;
+    }
+    .hero .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .hero .cta-buttons button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .hero .cta-buttons button:hover {
+      background-color: #009acd;
+      transform: translateY(-5px);
+    }
+  
+    /* Sections */
+    .section {
+      padding: 80px 0;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 20px 0;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .section h2 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: #00bfff;
+    }
+    .section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #F4F4F4;
+    }
+    .section .cta-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #00bfff;
+      color: #FFFFFF;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .section .cta-button:hover {
+      background-color: #009acd;
+      transform: translateY(-5px);
+    }
+  
+    /* Stack cards vertically and enlarge them */
+    .services-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+  
+    .issue-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s;
+    }
+    .issue-card:hover {
+      transform: translateY(-5px);
+    }
+    .issue-card img {
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .issue-card h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #00bfff;
+    }
+    .issue-card p {
+      font-size: 1rem;
+      color: #F4F4F4;
+    }
+  
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #FFFFFF;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+  
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 0;
+      margin-top: 40px;
+      backdrop-filter: blur(10px);
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    footer .footer-section {
+      flex: 1;
+      min-width: 200px;
+    }
+    footer h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #00bfff;
+    }
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+    footer ul li {
+      margin-bottom: 10px;
+    }
+    footer ul li a {
+      color: #FFFFFF;
+    }
+    footer .social-media a {
+      margin-right: 10px;
+      font-size: 24px;
+      color: #FFFFFF;
+      transition: color 0.3s;
+    }
+    footer .social-media a:hover {
+      color: #00bfff;
+    }
+    footer .legal {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+  </style>
+  
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo"><i class="fas fa-chart-line"></i> Business Dashboard</div>
+      <nav>
+        <ul>
+          <li><a href="#insights"><i class="fas fa-lightbulb"></i> Insights</a></li>
+          <li><a href="#issues"><i class="fas fa-exclamation-triangle"></i> Issues</a></li>
+          <li><a href="#reports"><i class="fas fa-download"></i> Reports</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <h1>Key Insights for Your Business Performance</h1>
+    <p>Discover your performance, monitor issues over time, and gain actionable insights.</p>
+    <div class="cta-buttons">
+      <button onclick="document.getElementById('insights').scrollIntoView();">
+        <i class="fas fa-chart-bar"></i> View Insights
+      </button>
+      <button onclick="document.getElementById('issues').scrollIntoView();">
+        <i class="fas fa-calendar-alt"></i> View Issues
+      </button>
+    </div>
+  </section>
+  
+  <div class="container">
+    
+    <section id="insights" class="section">
+      <h2><i class="fas fa-lightbulb"></i> Insights</h2>
+      <div class="services-grid">
+        {% for pg, data in insights.items() %}
+        <div class="issue-card">
+          <i class="fas fa-building"></i>
+          <h3>{{ pg }}</h3>
+          <p>Average Rating: {{ data.avg }}</p>
+          <p>Total Reviews: {{ data.total }}</p>
+          <p><i class="fas fa-thumbs-up"></i> Positive: {{ data.pos }}</p>
+          <p><i class="fas fa-thumbs-down"></i> Negative: {{ data.neg }}</p>
+          <p><i class="fas fa-meh"></i> Neutral: {{ data.neu }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    
+    <section id="issues" class="section">
+      <h2><i class="fas fa-exclamation-triangle"></i> Issues Overview</h2>
+      <div class="services-grid">
+        
+        <div class="issue-card">
+          <h3>Issues Over Time</h3>
+          <img src="{{ url_for('static', filename=time_graph) }}" 
+               alt="Issues Over Time">
+          <p>This graph shows the total number of issues logged over time.</p>
+        </div>
+    
+        <div class="issue-card">
+          <h3>Chat Issues Breakdown</h3>
+          <img src="{{ url_for('static', filename=chat_graph) }}" 
+               alt="Chat Issues Breakdown">
+          <p>A pie chart representing the breakdown of chat issues by category.</p>
+        </div>
+    
+        <div class="issue-card">
+          <h3>Issue Types Over Time</h3>
+          <img src="{{ url_for('static', filename=type_graph) }}" 
+               alt="Type of Issue Over Time">
+          <p>A multi-line chart displaying different issue types over time.</p>
+        </div>
+    
+        <div class="issue-card">
+          <h3>PG Issues Breakdown</h3>
+          <img src="{{ url_for('static', filename=pg_graph) }}" 
+               alt="PG Issues Breakdown">
+          <p>Pie charts showing issue distribution for each PG.</p>
+        </div>
+    
+      </div>
+    </section>
+    
+    
+    <section id="reports" class="section">
+      <h2><i class="fas fa-download"></i> Download Analytics Report</h2>
+      <a class="cta-button" href="{{ url_for('download_report') }}">
+        <i class="fas fa-file-download"></i> Download Report (PDF)
+      </a>
+    </section>
+    
+    <section class="section">
+      <h2><i class="fas fa-table"></i> Review Log</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Service Name</th>
+            <th>Review</th>
+            <th>Rating</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in log_data %}
+          <tr>
+            <td>{{ entry.pg }}</td>
+            <td>{{ entry.review }}</td>
+            <td>{{ entry.rating }}</td>
+            <td>{{ entry.type }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Your business insights at a glance. Monitor performance and issues with ease.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#issues">Issues</a></li>
+          <li><a href="#reports">Reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-section social-media">
+        <h3>Follow Us</h3>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="legal">
+      &copy; 2025 Your Company. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
